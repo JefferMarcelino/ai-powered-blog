@@ -5,9 +5,9 @@
   "main": "src/server.ts",
   "scripts": {
     "dev": "tsx --watch .",
-    "build": "npm install & tsc",
+    "build": "npm install && tsc && cp -R src/templates build/",
     "post-gen": "tsx src/generator.ts",
-    "start": "node ./build/src/server.js"
+    "start": "node ./build/server.js"
   },
   "keywords": [],
   "author": "",
