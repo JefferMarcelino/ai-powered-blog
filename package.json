@@ -1,0 +1,35 @@
+{
+  "name": "blog-by-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "dev": "tsx --watch .",
+    "build": "npm install & tsc",
+    "post-gen": "tsx src/generator.ts",
+    "start": "node ./build/src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@fastify/view": "^9.0.0",
+    "@google/generative-ai": "^0.5.0",
+    "@prisma/client": "^5.12.1",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "fastify": "^4.26.2",
+    "showdown": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/markdown-it": "^14.0.0",
+    "@types/node": "^20.12.5",
+    "@types/showdown": "^2.0.6",
+    "prisma": "^5.12.1",
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.4"
+  }
+}

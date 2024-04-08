@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+  </style>
+
+  <style>
+    :root {
+      --blue: #3EA1DB;
+      --blue-dark: #574AE8;
+      --white: #FFF;
+
+      --title: #313131;
+      --text: #B6B6B6;
+
+      --linear: linear-gradient(90deg, #574AE8 0%, #3EA1DB 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: 0;
+    }
+
+    a {
+      text-decoration: none;
+      display: block;
+    }
+
+    body {
+      font-family: Inter;
+    }
+
+    header {
+      background-image: var(--linear);
+      color: white;
+      padding: 20px;
+      font-size: 1.2rem;
+      margin-bottom: 50px;
+    }
+
+    header .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 41px;
+      max-width: 730px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    header .input {
+      padding: 12px 19px;
+      margin-bottom: 48px;
+      display: flex;
+      background-color: #ffffff33;
+      border-radius: 5px;
+      max-width: 690px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    header .input img {
+      width: 20px;
+      height: auto;
+    }
+
+    header .input input {
+      outline: none;
+      border: none;
+      background-color: transparent;
+      margin-left: 13px;
+      color: white;
+      font-family: Inter;
+      font-size: 14px;
+    }
+
+    header .input input::placeholder {
+      color: white;
+      font-family: Inter;
+      font-size: 14px;
+    }
+
+    main {
+      padding: 0px 20px;
+      max-width: 730px;
+      margin: auto;
+    }
+
+    main .container-post {
+      padding: 15px;
+      box-shadow: 0px 0px 10px rgba(19, 19, 31, 0.05);
+      border-radius: 5px;
+      margin-bottom: 2rem;
+    }
+
+    main .container-post div.top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .5rem;
+    }
+
+    main .container-post h3 {
+      color: var(--title);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    main .container-post p {
+      color: var(--text);
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 26px;
+    }
+
+    .message {
+      font-size: .8rem;
+      max-width: 730px;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="top">
+      <h2>Jeffer Marcelino</h2>
+      <span>Blog</span>
+    </div>
+
+    <p class="message">Powered by AI</p>
+  </header>
+
+  <main>
+    <section>
+      <% posts.forEach(post=> { %>
+        <a class="container-post" href="/post/<%= post.id %>">
+          <div class="top">
+            <p class="date">
+              <%= post.createdAt %>
+            </p>
+          </div>
+
+          <h3 class="title">
+            <%= post.title %>
+          </h3>
+          <p class="description">
+            <%= post.content.substring(0, 200) + (post.content.length > 100 ? '...' : '') %>
+          </p>
+        </a>
+      <% }); %>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+</body>
+
+</html>

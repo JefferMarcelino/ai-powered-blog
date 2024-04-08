@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= post.title %></title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  </style>
+
+  <style>
+    :root {
+      --blue: #3EA1DB;
+      --blue-dark: #574AE8;
+      --white: #FFF;
+
+      --title: #313131;
+      --text: #B6B6B6;
+
+      --linear: linear-gradient(90deg, #574AE8 0%, #3EA1DB 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: 0;
+    }
+
+    body {
+      font-family: Inter;
+    }
+
+    main {
+      padding: 0px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    main .container-post {
+      padding: 15px;
+      margin-bottom: 2rem;
+    }
+
+    main .container-post .date {
+      color: var(--text);
+    }
+
+    main .container-post div.top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .5rem;
+    }
+
+    main .container-post p {
+      font-size: 1rem;
+      line-height: 26px;
+    }
+
+    main .container-post strong {
+      color: #3EA1DB;
+      font-weight: 500;
+    }
+
+    main .container-post h1 {
+      margin-bottom: 1rem;
+    }
+
+    main .container-post h2 {
+      font-size: 1.2rem;
+      margin: 1rem 0 0;
+      text-transform: uppercase;
+    }
+
+    main .container-post .content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    main .container-post .content ul {
+      list-style-position: inside;
+    }
+
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="container-post">
+      <div>
+        <p class="date">
+          <%= post.createdAt %>
+        </p>
+
+        <h1 class="title">
+          <%= post.title %>
+        </h1>
+      </div>
+      <div class="content">
+        <%- post.content %>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+</body>
+</html>
