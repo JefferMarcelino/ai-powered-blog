@@ -1,0 +1,19 @@
+name: Generate new post
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+
+jobs:
+  send-requests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send wakeup request
+        run: |
+          curl -X GET https://blog-by-ai.onrender.com/
+          sleep 30
+
+      - name: Send request to generate new post
+        run: |
+          curl -X GET https://blog-by-ai.onrender.com/generate
