@@ -18,9 +18,9 @@ const createPost = async (
       },
     });
 
-    console.log('New post created: ', newPost);
+    console.log("New post created: ", newPost);
   } catch (error) {
-    console.error('Error creating post:', error);
+    console.error("Error creating post:", error);
   } finally {
     await prisma.$disconnect();
   };
@@ -58,14 +58,14 @@ export const run = async () => {
     const response = await result.response;
     const text = response.text();
     
-    const [ title, ...contentWithTagsAndImage ] = text.split('\n');
+    const [ title, ...contentWithTagsAndImage ] = text.split("\n");
 
     await createPost(
       title.replace(/#/g, "").trim(),
       contentWithTagsAndImage.join("\n")
     );
   } catch (error) {
-    console.error('Error creating post:', error);
+    console.error("Error creating post:", error);
   } finally {
     await prisma.$disconnect();
   };

@@ -1,9 +1,9 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
 import view from "@fastify/view";
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 import ejs from "ejs"
-import path from 'path';
+import path from "path";
 import dayjs from "dayjs";
 import showdown from "showdown";
 import { run } from "./generator";
@@ -15,7 +15,7 @@ app.register(view, {
   engine: {
     ejs: ejs,
   },
-  root: path.join(__dirname, 'templates')
+  root: path.join(__dirname, "templates")
 });
 
 const converter = new showdown.Converter({
@@ -26,7 +26,7 @@ const converter = new showdown.Converter({
 
 const prisma = new PrismaClient();
 
-app.get('/', async (request, reply) => {
+app.get("/", async (request, reply) => {
   try {
     const posts = await prisma.post.findMany({
       orderBy: {
@@ -34,21 +34,21 @@ app.get('/', async (request, reply) => {
       }
     });
 
-    reply.type('text/html').code(200);
-    return reply.view('index.ejs', { posts: posts.map(item => {
+    reply.type("text/html").code(200);
+    return reply.view("index.ejs", { posts: posts.map(item => {
       return {
         ...item,
-        createdAt: dayjs(item.createdAt).format('MMMM D, YYYY HH:mm')
+        createdAt: dayjs(item.createdAt).format("MMMM D, YYYY HH:mm")
       }
     }) });
   } catch (error) {
-    console.error('Error fetching blog posts:', error);
+    console.error("Error fetching blog posts:", error);
     reply.status(500);
-    return 'Error fetching blog posts';
+    return "Error fetching blog posts";
   }
 });
 
-app.get('/post/:postId', async (request, reply) => {
+app.get("/post/:postId", async (request, reply) => {
   try {
     const { postId } = request.params as { postId: string }
 
@@ -60,13 +60,13 @@ app.get('/post/:postId', async (request, reply) => {
 
     if (!post) {
       reply.code(404);
-      return 'Post not found';
+      return "Post not found";
     }
 
-    const formattedCreatedAt = dayjs(post.createdAt).format('MMMM D, YYYY HH:mm');
+    const formattedCreatedAt = dayjs(post.createdAt).format("MMMM D, YYYY HH:mm");
 
-    reply.type('text/html').code(200);
-    return reply.view('post.ejs', { 
+    reply.type("text/html").code(200);
+    return reply.view("post.ejs", { 
       post: { 
         ...post, 
         createdAt: formattedCreatedAt,
@@ -74,19 +74,19 @@ app.get('/post/:postId', async (request, reply) => {
       }, 
     });
   } catch (error) {
-    console.error('Error fetching blog post:', error);
-    return 'Error fetching blog post';
+    console.error("Error fetching blog post:", error);
+    return "Error fetching blog post";
   }
 });
 
-app.get('/generate', async (request, reply) => {
+app.get("/generate", async (request, reply) => {
   try {
     await run();
     return { message: "Okay " };
   } catch (error) {
-    console.error('Error fetching blog posts:', error);
+    console.error("Error fetching blog posts:", error);
     reply.status(500);
-    return 'Error fetching blog posts';
+    return "Error fetching blog posts";
   }
 });
 
