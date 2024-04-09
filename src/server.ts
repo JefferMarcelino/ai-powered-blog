@@ -38,7 +38,7 @@ app.get('/', async (request, reply) => {
     return reply.view('index.ejs', { posts: posts.map(item => {
       return {
         ...item,
-        createdAt: dayjs(item.createdAt).format('MMMM D, YYYY')
+        createdAt: dayjs(item.createdAt).format('MMMM D, YYYY HH:mm')
       }
     }) });
   } catch (error) {
@@ -63,7 +63,7 @@ app.get('/post/:postId', async (request, reply) => {
       return 'Post not found';
     }
 
-    const formattedCreatedAt = dayjs(post.createdAt).format('MMMM D, YYYY');
+    const formattedCreatedAt = dayjs(post.createdAt).format('MMMM D, YYYY HH:mm');
 
     reply.type('text/html').code(200);
     return reply.view('post.ejs', { 
