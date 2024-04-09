@@ -28,11 +28,35 @@ const prisma = new PrismaClient();
 
 app.get("/", async (request, reply) => {
   try {
-    const posts = await prisma.post.findMany({
-      orderBy: {
-        createdAt: "desc"
-      }
-    });
+    const { s: searchTerm} = request.query as { s: string};
+
+    let posts: {
+      id: string;
+      title: string;
+      content: string;
+      createdAt: Date;
+      views: number;
+    }[];
+
+    if (searchTerm) {
+      posts = await prisma.post.findMany({
+        where: {
+          title: {
+            contains: searchTerm,
+            mode: "insensitive"
+          }
+        },
+        orderBy: {
+          createdAt: "desc"
+        }
+      });
+    } else {
+      posts = await prisma.post.findMany({
+        orderBy: {
+          createdAt: "desc"
+        }
+      });
+    };
 
     reply.type("text/html").code(200);
     return reply.view("index.ejs", { posts: posts.map(item => {
@@ -61,7 +85,18 @@ app.get("/post/:postId", async (request, reply) => {
     if (!post) {
       reply.code(404);
       return "Post not found";
-    }
+    };
+
+    await prisma.post.update({
+      where: {
+        id: postId
+      },
+      data: {
+        views: {
+          increment: 1
+        }
+      }
+    });
 
     const formattedCreatedAt = dayjs(post.createdAt).format("MMMM D, YYYY HH:mm");
 

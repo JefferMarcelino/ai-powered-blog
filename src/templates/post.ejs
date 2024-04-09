@@ -55,6 +55,18 @@
       margin-bottom: .5rem;
     }
 
+    main .container-post div.top div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .2rem;
+    }
+
+    main .container-post div.top div img {
+      max-width: 18px;
+      width: 100%;
+    }
+
     main .container-post p {
       font-size: 1rem;
       line-height: 26px;
@@ -66,6 +78,7 @@
     }
 
     main .container-post h1 {
+      font-size: 2.2rem;
       margin-bottom: 1rem;
     }
 
@@ -86,6 +99,11 @@
       list-style-position: inside;
     }
 
+    @media screen and (max-width: 767px) {
+      main .container-post h1 {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 
@@ -93,9 +111,16 @@
   <main>
     <div class="container-post">
       <div>
-        <p class="date">
-          <%= post.createdAt %>
-        </p>
+        <div class="top">
+          <p class="date">
+            <%= post.createdAt %>
+          </p>
+
+          <div>
+            <img src="https://static.thenounproject.com/png/2040082-200.png" alt="Views icon">
+            <%= post.views %>
+          </div>
+        </div>
 
         <h1 class="title">
           <%= post.title %>

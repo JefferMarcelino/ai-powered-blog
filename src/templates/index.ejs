@@ -43,7 +43,7 @@
       color: white;
       padding: 20px;
       font-size: 1.2rem;
-      margin-bottom: 50px;
+      margin-bottom: 20px;
     }
 
     header .top {
@@ -80,6 +80,7 @@
       color: white;
       font-family: Inter;
       font-size: 14px;
+      width: 100%;
     }
 
     header .input input::placeholder {
@@ -108,6 +109,18 @@
       margin-bottom: .5rem;
     }
 
+    main .container-post div.top div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .2rem;
+    }
+
+    main .container-post div.top div img {
+      max-width: 18px;
+      width: 100%;
+    }
+
     main .container-post h3 {
       color: var(--title);
       font-size: 18px;
@@ -126,6 +139,18 @@
       max-width: 730px;
       margin: auto;
     }
+
+    #search-message {
+      margin: 20px 0;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    @media screen and (max-width: 767px) {
+      #search-message {
+        font-size: 1.5rem;
+      }
+    } 
   </style>
 </head>
 
@@ -136,10 +161,16 @@
       <span>Blog</span>
     </div>
 
+    <form id="search-form" class="input" action="/" method="get">
+      <img src="https://github.com/JefferMarcelino/codelandia-challenges/blob/main/challenge1/images/search.png?raw=true" alt="Search">
+      <input id="search-input" type="text" name="s" placeholder="Search article">
+    </form>
+
     <p class="message">Powered by AI</p>
   </header>
 
   <main>
+    <p id="search-message"></p>
     <section>
       <% posts.forEach(post=> { %>
         <a class="container-post" href="/post/<%= post.id %>">
@@ -147,6 +178,11 @@
             <p class="date">
               <%= post.createdAt %>
             </p>
+
+            <div>
+              <img src="https://static.thenounproject.com/png/2040082-200.png" alt="Views icon">
+              <p><%= post.views %></p>
+            </div>
           </div>
 
           <h3 class="title">
@@ -161,6 +197,24 @@
   </main>
 
   <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    const searchInput = document.getElementById("search-input");
+    const searchMessage = document.getElementById("search-message");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTerm = urlParams.get("s");
+
+    if (searchTerm) {
+      searchInput.value = searchTerm;
+      searchMessage.textContent = `Results for "${searchTerm}"`;
+    }
+
+    ScrollReveal().reveal('.container-post', {
+      duration: 1000,
+      delay: 200,
+      interval: 100
+    });
+  </script>
 </body>
 
 </html>
