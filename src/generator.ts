@@ -36,7 +36,7 @@ export const run = async () => {
       }
     })).map(item => item.title);
 
-    const prompt = `Write a complete article discussing a topic within software development, excluding the following topics: ${titles.join(", ")}. # for main title (the topic choosed, the first title will always have one #), ## for subtitles (the titles following the main title), ### for sub-subtitles, and so on. Followed by Markdown-formatted content. Please adhere to the following structure. Each section should include relevant content in Markdown format. Please ensure that the article covers the topic comprehensively and includes multiple sections with detailed information.
+    const prompt = `Write a complete article discussing a topic within software development and programming (Java, Python, Ruby, Go, Javascript, Typescript, etc). # for main title (the topic choosed, the first title will always have one #), ## for subtitles (the titles following the main title), ### for sub-subtitles, and so on. Followed by Markdown-formatted content. Please adhere to the following structure. Each section should include relevant content in Markdown format. Please ensure that the article covers the topic comprehensively and includes multiple sections with detailed information.
 
     Example:
     # Main title
